@@ -78,6 +78,31 @@ router.get('/:codigo', (req, res, next) => {
     });
 });
 
+router.delete('/:codigo_usuario/?', (req, res, next) => {
+    db.getConnection((error, conn) => {
+
+        const codigoParametro = req.params.codigo_usuario;
+
+        if (error) {
+            return res.status(500).send({ error: error });
+        }
+
+        conn.query(
+            'delete from tarefas where codigo_usuario=?',
+            codigoParametro,
+            (error, result, fields) => {
+                if (error) {
+                    return res.status(500).send({ error: error });
+                }
+
+                res.status(201).send({
+                    mensagem: 'Campo deletado com sucesso'
+                })
+            }
+        )
+    });
+});
+
 router.post('/', (req, res, next) => {
 
 })

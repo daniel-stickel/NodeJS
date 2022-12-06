@@ -103,6 +103,36 @@ router.delete('/:codigo_usuario/?', (req, res, next) => {
     });
 });
 
+router.put('/index.js', (req, res, next) => {
+    db.getConnection((error, conn) => {
+
+        const codigoParametro = req.params.codigo;
+
+        if (error) {
+            return res.status(500).send({ error: error });
+        }
+
+        conn.query(
+            'update usuario set codigo = ?, nome = ? where codigo_usuario = ?'
+            [req.body.codigo, req.body.codigo, req.body.codigo_usuario],
+            (error, result, fields) => {
+                conn.release();
+
+                if (error) {
+                    return res.status(500).send({
+                        error: error
+                    })
+                }
+                res.status(201).send({
+                    mensagem: 'tabela usuario editada com sucesso'
+                })
+            }
+        )
+    });
+});
+
+// Proximo passo adicionar o PUT famoso UpDate
+
 router.post('/', (req, res, next) => {
 
 })

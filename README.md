@@ -5,7 +5,7 @@
 Para intalar as dependencias do projeto:
 
 ```
- mpn i --save
+ mpn i 
  ```
 
   Para iniciar a aplicação use:
